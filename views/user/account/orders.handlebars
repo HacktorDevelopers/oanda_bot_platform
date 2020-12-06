@@ -1,0 +1,33 @@
+{{> user.other.accounts }}
+
+<div class="ui container white">
+    <div class="sub header white" style="color: black;">
+        Orders &nbsp;&nbsp; 
+        <button account_id="{{accountId}}" class="ui button positive tiny createOrderButton">create order</button>&nbsp;&nbsp; 
+        {{!-- <button account_id="" class="ui button orange tiny scheduleOrderButton">schedule order</button> --}}
+    </div>
+    <table class="ui celled padded table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Instrument</th>
+                <th>Unit</th>
+                <th>Price</th>
+                <th>State</th>
+                <th>Time Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each accountOrders.orders as | accountOrder |}}
+                <tr>
+                    <td>{{accountOrder.type}}</td>
+                    <td>{{accountOrder.instrument}}</td>
+                    <td>{{accountOrder.units}}</td>
+                    <td>{{accountOrder.price}}</td>
+                    <td>{{accountOrder.state}}</td>
+                    <td>{{accountOrder.createTime}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

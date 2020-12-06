@@ -1,0 +1,21 @@
+<div class="ui container">
+    <h3>User Accounts</h3>
+    <div class="ui cards centered">
+        {{#each userAccounts.accounts as | userAcct |}}
+            {{> user.one.account userAccount=userAcct}}
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.content.account_detail').each((index, element) => {
+            var accountId = element.attributes.accountid.textContent;
+            var divId = `#${accountId}_description`;
+            $(divId).html("<div class='ui active centered inline loader'></div>")
+            fetch('/user/accounts/'+accountId+'/details').then(res => res.text()).then(res => {
+                $(divId).html(res)
+            })
+        })
+    })
+</script>

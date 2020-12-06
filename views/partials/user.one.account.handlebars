@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="content account_detail" accountid="{{ userAccount.id }}">
+        
+        <div class="header">
+            <a href="/user/accounts/{{userAccount.id}}" class="ui orange left ribbon label">{{ userAccount.id }}</a>
+            <span>{{ count userAccount.tags }} Tags</span>
+        </div>
+        <hr></hr>
+        <div class="description" id="{{ userAccount.id }}_description">
+            
+        </div>
+    </div>
+    <div class="ui buttons">
+        <a class="ui bottom attached green button" href="/user/accounts/{{userAccount.id}}/orders">
+        <i class="add eye"></i>
+            orders
+        </a>
+        <a class="ui bottom attached orange button" href="/user/trade/{{userAccount.id}}/ALL/500">
+        <i class="add eye"></i>
+            trades
+        </a>
+    </div>
+</div>

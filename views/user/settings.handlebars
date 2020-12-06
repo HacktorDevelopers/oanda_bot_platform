@@ -1,0 +1,49 @@
+<div class="ui container">
+    <div class="ui segment">
+        <div class="content">
+            <form class="ui form" action="/bot/start_bot" method="POST" target="_blank">
+                <h4 class="ui dividing header">Settings</h4>
+                <div class="field">
+                    
+                    <div class="two fields">
+                    <div class="field">
+                        <label>Maximum amount for trade</label>
+                        <input type="text" name="shipping[first-name]" placeholder="Maximum amount for trade">
+                    </div>
+                    <div class="field">
+                        <label>Maximum amount for trade per trade</label>
+                        <input type="text" name="shipping[last-name]" placeholder="Maximum amount for trade per trade">
+                    </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Billing Address</label>
+                    <div class="fields">
+                    <div class="twelve wide field">
+                        <input type="text" name="shipping[address]" placeholder="Street Address">
+                    </div>
+                    <div class="four wide field">
+                        <input type="text" name="shipping[address-2]" placeholder="Apt #">
+                    </div>
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                    <label>State</label>
+                    <select class="ui fluid dropdown">
+                        <option value="">State</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                    </div>
+                </div>
+                
+                <button class="ui green ok inverted button" id="confirmCreateOrder" tabindex="0">
+                <i class="checkmark icon"></i>
+                Update Settings
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

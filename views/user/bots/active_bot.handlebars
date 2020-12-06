@@ -1,0 +1,14 @@
+<div class="ui container">
+    {{#if (ifEquals (count bots) 0) }}
+        <h1>No Active Running Bot</h1>
+    {{/if}}
+
+    {{#each bots as | bot |}}
+        <div>
+            {{bot}}
+            <a class="ui button negative tiny" href="/bot/stop_bot/{{bot}}">Stop Bot</a>
+            <a class="ui button positive tiny" href="/bot/bot_log/{{bot}}">view log</a>
+        </div>
+        <br/>
+    {{/each}}
+</div>

@@ -1,0 +1,58 @@
+{{> user.other.accounts acctId=accountDetail.account.id }}
+<div class="ui white segment container">
+    <h3>
+        {{accountDetail.account.id}} Detail
+        <div class="ui floated left">
+            <a class="ui button blue" href="/user/accounts/{{accountDetail.account.id}}/orders">Orders</a>
+        </div>
+    </h3>
+
+    <div class="ui raised">
+        <div class="ui top attached tabular menu">
+            <div class="item active" data-tab="details">Details</div>
+            {{!-- <div class="item" data-tab="summary">Summary</div> --}}
+            <div class="item" data-tab="instruments">Tradable Instruments</div>
+            <div class="item" data-tab="transactions">Transactions</div>
+        </div>
+        <div class="ui bottom attached active tab segment" data-tab="details">
+            <div class="ui cards centered very padded">
+                {{#each accountDetail.account as | detail |}}
+                    <div class="card">
+                        <div class="content">
+                            <div class="header">{{ @key }}</div>
+                            <div class="description">
+                                {{ detail }} 
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="ui bottom attached tab segment" data-tab="instruments">
+            <div class="ui cards centered very padded">
+                {{#each accountInstruments.instruments as | instrument |}}
+                    <div class="card">
+                        <div class="content">
+                            <div class="header">{{ instrument.name }}</div>
+                            <div class="description">
+                                <p>Type: {{ instrument.type }}</p>
+                                <p>Display name: {{ instrument.displayName }}</p>
+                                <p>Margin rate: {{ instrument.marginRate }}</p>
+                                <p>Minimum Trade Size: {{ instrument.minimumTradeSize }}</p>
+                                <p>Maximum Order Unit: <span class="statistic">{{ instrument.maximumOrderUnits }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="ui bottom attached tab segment" data-tab="transactions">
+            <div class="ui cards centered very padded">
+                {{> user.transactions transactions=accountTransactions.transactions }}
+            </div>
+        </div>
+
+    </div>
+</div>

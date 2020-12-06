@@ -1,0 +1,94 @@
+<form class="ui form" style="color: whitesmoke;" action="{{createUrl}}" method="POST">
+    <h4 class="ui dividing header">New Order Information</h4>
+    <div class="two fields">
+        <div class="field">
+            <label>Order Type</label>
+            <select required class="ui fluid dropdown" name="type">
+                <option selected disabled>Select order type</option>
+                <option value="MARKET">Market Order Type</option>
+                <option value="LIMIT">Limit Order Type</option>
+                <option value="STOP">Stop Order Type</option>
+                <option value="MARKET_IF_TOUCHED">Market If Touched Order Type</option>
+                <option value="TAKE_PROFIT">Take Profit Order Type</option>
+                <option value="STOP_LOSS">Stop Loss Order Type</option>
+                <option value="GUARANTEED_STOP_LOSS">Guaranteed Stop Loss Order Type</option>
+                <option value="TRAILING_STOP_LOSS">Trailing Stop Loss Order Type</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Instruments</label>
+            <select required class="ui fluid dropdown" name="instrument">
+                <option selected disabled>Select instrument to trade</option>
+                {{#each accountInstruments.instruments as | instrument |}}
+                    <option value="{{instrument.name}}">{{ instrument.displayName }}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+    <div class="field">
+        <div class="two fields">
+            <div class="field">
+                <label>Time in force</label>
+                <select required class="ui fluid dropdown" name="timeInForce">
+                    <option selected disabled>Select time in force</option>
+                    <option value="GTC">Good unTil Cancelled</option>
+                    <option value="GTD">Good unTil Date</option>
+                    <option value="GFD">Good For Day</option>
+                    <option value="FOK">Filled Or Killed</option>
+                    <option value="IOC">Immediately partially filled Or Cancelled</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Units</label>
+                <input required type="text" name="units" placeholder="The quantity requested to be filled by the Market Order">
+            </div>
+            <div class="field">
+                <label>Price</label>
+                <input required type="text" name="price" placeholder="The price threshold specified for the Stop Order">
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="two fields">
+            <div class="field">
+                <label>Price Bound</label>
+                <input required type="text" name="priceBound" placeholder="The worst price that the you are willing to have the Market Order filled at ">
+            </div>
+            <div class="field">
+                <label>Time in force</label>
+                <select required class="ui fluid dropdown" name="positionFill">
+                    <option selected disabled>Select time in force</option>
+                    <option value="OPEN_ONLY">When the Order is filled, only allow Positions to be opened or extended</option>
+                    <option value="REDUCE_FIRST">When the Order is filled, always fully reduce an existing Position before opening a new Position</option>
+                    <option value="REDUCE_ONLY">When the Order is filled, only reduce an existing Position</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>GTD Time Stamp</label>
+                <input required type="datetime-local" name="gtdTime" placeholder="The price threshold specified for the Stop Order">
+            </div>
+        </div>
+    </div>
+    
+    
+    <button class="ui green ok inverted button" id="confirmCreateOrder" tabindex="0">
+    <i class="checkmark icon"></i>
+        Confirm Order
+    </button>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $("#orderCreationForm").submit(function(e) {
+            e.preventDefault();
+            var data = new FormData(e.target);
+            console.log(data);
+            var url = $("#orderCreationForm").attr('action');
+            console.log(url);
+            fetch(`${url}`, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            }).then(res => console.log(res))
+        })
+    })
+</script>

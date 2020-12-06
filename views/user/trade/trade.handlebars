@@ -1,0 +1,100 @@
+<div class="ui container">
+  <div class="ui top attached tabular menu">
+    <div class="active item" data-tab="open">Open</div>
+    <div class="item" data-tab="scheduled">Scheduled</div>
+    <div class="item" data-tab="closed">Closed</div>
+  </div>
+
+  <div class="ui bottom attached active tab segment" data-tab="open">
+    <div class="ui cards">
+      {{#each trades as | trade |}}
+        {{#if (ifEquals trade.state 'OPEN') }}
+          <div class="card">
+            <div class="content">
+              <img class="right floated mini ui image" src="https://semantic-ui.com/examples/assets/images/avatar/nan.jpg">
+              <div class="header">
+                {{trade.instrument}}
+              </div>
+              <div class="meta">
+                Price: {{trade.price}}
+              </div>
+              <div class="description">
+                <p>Initial unit: {{trade.initialUnits}}</p>
+                <p>Open time: {{trade.openTime}}</p>
+                <p>Margin Used: {{trade.marginUsed}}</p>
+                <p>State: {{trade.state}}</p>
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui two buttons">
+                <div class="ui basic green button">View</div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="ui bottom attached tab segment" data-tab="scheduled">
+    <div class="ui cards">
+      {{#each trades as | trade |}}
+        {{#if (ifEquals trade.state 'PENDING') }}
+          <div class="card">
+            <div class="content">
+              <img class="right floated mini ui image" src="https://semantic-ui.com/examples/assets/images/avatar/nan.jpg">
+              <div class="header">
+                {{trade.instrument}}
+              </div>
+              <div class="meta">
+                Price: {{trade.price}}
+              </div>
+              <div class="description">
+                <p>Initial unit: {{trade.initialUnits}}</p>
+                <p>Open time: {{trade.openTime}}</p>
+                <p>Margin Used: {{trade.marginUsed}}</p>
+                <p>State: {{trade.state}}</p>
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui two buttons">
+                <div class="ui basic green button">View</div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="ui bottom attached tab segment" data-tab="closed">
+    <div class="ui cards">
+      {{#each trades as | trade |}}
+        {{#if (ifEquals trade.state 'CLOSED') }}
+          <div class="card">
+            <div class="content">
+              <img class="right floated mini ui image" src="https://semantic-ui.com/examples/assets/images/avatar/nan.jpg">
+              <div class="header">
+                {{trade.instrument}}
+              </div>
+              <div class="meta">
+                Price: {{trade.price}}
+              </div>
+              <div class="description">
+                <p>Initial unit: {{trade.initialUnits}}</p>
+                <p>Open time: {{trade.openTime}}</p>
+                <p>Margin Used: {{trade.marginUsed}}</p>
+                <p>State: {{trade.state}}</p>
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui two buttons">
+                <div class="ui basic green button">View</div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="ui small modal createOrderModal">
+        <div class="ui icon header">
+            <i class="archive icon"></i>
+            Create New Order
+        </div>
+        <div class="content" id="createOrderFormContent">
+            
+        </div>
+        <div class="actions">
+            <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            Cancel
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(() => {
+            $('.top.menu .item').tab();
+            $('.createOrderButton').click((e) => {
+                $("#createOrderFormContent").html("<div class='ui container'><div class='ui active dimmer'><div class='ui text loader'>Loading</div></div><p></p></div>");
+                console.log(e);
+                var attributes = e.target.attributes['account_id'];
+                console.log(typeof(attributes.nodeValue));
+                var accountId = attributes.nodeValue;
+                console.log(accountId);
+                fetch('/user/accounts/'+accountId+'/orderForm').then(res => res.text()).then(res => {
+                    $("#createOrderFormContent").html(res);
+                })
+                $('.ui.small.modal.createOrderModal').modal('show');
+            });
+        })
+        
+    </script>

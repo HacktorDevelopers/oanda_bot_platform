@@ -1,0 +1,69 @@
+
+<div class="">
+    <div class="sub header">All Transactions</div>
+    <table class="ui celled padded table">
+    <thead>
+        <tr>
+            <th>Transaction Id</th>
+            <th>Request ID</th>
+            <th>Type</th>
+            <th>Currency</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each transactions as | transaction | }}
+            <tr class="">
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.requestID }}</td>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.homeCurrency }}</td>
+                <td>{{ transaction.time }}</td>
+                <td>
+                    <button class="ui button animated">
+                        <div class="visible content transaction" transaction_id="{{transaction.id}}" account_id="{{transaction.accountID}}">
+                            <i class="icon eye transaction" transaction_id="{{transaction.id}}" account_id="{{transaction.accountID}}"></i>
+                        </div>
+                        <div class="hidden content transaction" transaction_id="{{transaction.id}}" account_id="{{transaction.accountID}}">view</div>
+                    </button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+    </table>
+</div>
+
+<div class="ui modal transactionDetailModal">
+  <i class="close icon"></i>
+  <div class="header">
+    Transaction Detail
+  </div>
+  <div class="content" id="transactionDetailModelContent">
+    
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      close
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        $('.transaction').click((e) => {
+            $("#transactionDetailModelContent").html("<div class='ui segment'><div class='ui active loader'></div><p></p> </div>");
+            $('.ui.modal.transactionDetailModal').modal('show');
+            let attributes = e.target.attributes;
+            console.log(attributes);
+            let transId = attributes['transaction_id'].nodeValue;
+            let acctId = attributes['account_id'].nodeValue;
+            fetch('/user/transactions/'+acctId+'/'+transId).then((res) => res.text()).then((res) => {
+                console.log(res);
+                $("#transactionDetailModelContent").html(`${res}`);
+            }).catch(error => {
+                $("#transactionDetailModelContent").html(`${error.toString()}`);
+            })
+        })
+    });
+</script>
